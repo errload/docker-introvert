@@ -38,8 +38,15 @@ RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/i
 RUN docker-php-ext-install gd
 RUN pecl install mcrypt && docker-php-ext-enable mcrypt
 
-RUN docker-php-ext-configure intl --with-icu-dir=/usr/local && \
-    docker-php-ext-install intl
+#RUN curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/55.1/icu4c-55_1-src.tgz \
+#    && tar -zxf /tmp/icu.tar.gz -C /tmp \
+#    && cd /tmp/icu/source \
+#    && ./configure --prefix=/usr/local \
+#    && make \
+#    && make install
+
+#RUN docker-php-ext-configure intl --with-icu-dir=/usr/local && \
+#    docker-php-ext-install intl
 
 COPY --from=composer:latest usr/bin/composer /usr/bin/composer
 RUN pecl install xdebug-3.1.5 && docker-php-ext-enable xdebug
