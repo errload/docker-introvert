@@ -49,7 +49,7 @@ RUN pecl install mcrypt && docker-php-ext-enable mcrypt
 #    docker-php-ext-install intl
 
 COPY --from=composer:latest usr/bin/composer /usr/bin/composer
-RUN pecl install xdebug-3.1.5 && docker-php-ext-enable xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 RUN mkdir -p /var/www/dev
 WORKDIR /var/www/dev
